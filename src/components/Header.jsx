@@ -3,30 +3,21 @@ import logo from "../assets/logo.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import userIcon from "../assets/user.png";
 import { IoSearchOutline } from "react-icons/io5";
+import { navigation } from "../constants/Navigation";
 
 const Header = () => {
   const [searchInput, setSearchInput] = useState("");
-  const navigate = useNavigate()
-  const navigation = [
-    {
-      label: "TV Shows",
-      href: "tv",
-    },
-    {
-      label: "Movies",
-      href: "movies",
-    },
-  ];
+  const navigate = useNavigate();
 
   useEffect(() => {
-    navigate(`/search?q=${searchInput}`)
+    if (searchInput) {
+      navigate(`/search?q=${searchInput}`);
+    }
   }, [searchInput]);
 
-  const handleSubmit= (e) =>{
-    e.preventDefault()
-  }
-
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <header className="fixed top-0 w-full h-16 bg-neutral-600 bg-opacity-75 ">
@@ -58,13 +49,16 @@ const Header = () => {
           })}
         </nav>
         <div className="ml-auto flex items-center gap-5">
-
-          <form action="" className=" flex items-center" onSubmit={handleSubmit}>
+          <form
+            action=""
+            className=" flex items-center"
+            onSubmit={handleSubmit}
+          >
             <input
               type="text"
               placeholder="Search here ...."
               className=" bg-transparent px-4 py-1 outline-none border-none hidden lg:block"
-              onChange={(e)=>setSearchInput(e.target.value)}
+              onChange={(e) => setSearchInput(e.target.value)}
               value={searchInput}
             />
             <button className="text-4xl text-white">
