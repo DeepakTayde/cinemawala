@@ -1,8 +1,12 @@
 import React from 'react'
+import TrendingBanner from '../components/TrendingBanner'
+
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+      <TrendingBanner/>
+    </div>
   )
 }
 
