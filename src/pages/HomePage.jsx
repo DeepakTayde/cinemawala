@@ -1,18 +1,13 @@
-import React from "react";
-import TrendingBanner from "../components/TrendingBanner";
-import Card from "../components/Card";
-import { useSelector } from "react-redux";
-import HorizontalCardScrollingBar from "../components/HorizontalCardScrollingBar";
+import React from 'react'
+import TrendingBanner from '../components/TrendingBanner'
+
 
 const HomePage = () => {
-  const trendingData = useSelector((state) => state.movieData.bannerData);
-
   return (
-    <>
-      <TrendingBanner />
-      <HorizontalCardScrollingBar data={trendingData} heading={"Trending"}/>
-    </>
-  );
-};
+    <div>
+      <TrendingBanner/>
+    </div>
+  )
+}
 
-export default HomePage;
+export default HomePage
