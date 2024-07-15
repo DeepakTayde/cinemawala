@@ -28,13 +28,9 @@ const Header = () => {
         <nav className="hidden lg:flex items-center gap-1 ml-5">
           {navigation.map((nav, index) => {
             return (
-              // <a href={item.href} key={index} className="px-4 py-2
-              // text-white hover:text-white hover:bg-neutral-700
-              // hover:rounded-md hover:transition-all hover:duration-300
-              // hover:ease-in-out">{item.label}</a>
-              <div>
+              <div key={nav.label+"header"+index}> 
                 <NavLink
-                  key={nav.label}
+                  key={nav.label+"header"+index}
                   to={nav.href}
                   className={({ isActive }) =>
                     `px-2 hover:text-neutral-100 ${
