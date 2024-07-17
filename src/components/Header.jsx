@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import userIcon from "../assets/user.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { navigation } from "../constants/Navigation";
 
 const Header = () => {
-  const [searchInput, setSearchInput] = useState("");
+  const location = useLocation()
+  const removeSpace = location?.search?.slice(3)?.split("%20")?.join(" ")
+  const [searchInput, setSearchInput] = useState(removeSpace);
   const navigate = useNavigate();
-
+  console.log("remove Space ", removeSpace)
   useEffect(() => {
     if (searchInput) {
       navigate(`/search?q=${searchInput}`);
@@ -20,7 +22,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full h-16 bg-neutral-600 bg-opacity-75 z-40 ">
+    <header className="fixed top-0 w-full h-16 bg-black bg-opacity-60 z-40 ">
       <div className="container mx-auto px-3 flex items-center h-full">
         <Link to={"/"}>
           <img src={logo} alt="logo" width={120}></img>
