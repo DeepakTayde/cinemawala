@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Card from "./Card";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-const HorizontalCardScrollingBar = ({ data = [], heading }) => {
+const HorizontalCardScrollingBar = ({ data = [], heading, trending, media_type }) => {
   const containerRef = useRef();
   const handleNext = ()=>{
     containerRef.current.scrollLeft += containerRef.current.offsetWidth;
@@ -27,7 +27,8 @@ const HorizontalCardScrollingBar = ({ data = [], heading }) => {
                 key={item.id + "heading" + index}
                 data={item}
                 index={index + 1}
-                trending={true}
+                trending={trending}
+                media_type={media_type}
               />
             );
           })}

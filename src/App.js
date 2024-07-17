@@ -16,7 +16,6 @@ function App() {
     try {
       const response = await axios.get('/trending/all/day')
       dispatch(setBannerData(response.data.results))
-      console.log("Response : ", response.data.results )
     } catch (error) {
       console.log("Error : ", error)
     }
@@ -40,7 +39,7 @@ function App() {
   return (
     <main className="pb-14 lg:pb-0">
       <Header />
-      <div className="">
+      <div className=" min-h-[90vh]">
         <Outlet />
       </div>
       <Footer />
