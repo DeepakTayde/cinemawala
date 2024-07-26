@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
 import TrendingBanner from "../components/TrendingBanner";
 import { useSelector } from "react-redux";
 import HorizontalCardScrollingBar from "../components/HorizontalCardScrollingBar";
-import axios from "axios";
+
 import useFetch from "../hooks/useFetch";
 
 const HomePage = () => {

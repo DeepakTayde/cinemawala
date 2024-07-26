@@ -8,7 +8,7 @@ const SearchPage = () => {
   const [data, setData] = useState([]);
   const [pageNo, setPageNo] = useState(1)
   const navigate = useNavigate()
-
+  const query = location?.search?.slice(3)
   const fetchData = async () => {
     try {
       const response = await axios.get("search/multi", {
@@ -27,9 +27,12 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
-    setPageNo(1);
-    setData([]);
-    fetchData();
+    if(query){
+      setPageNo(1);
+      setData([]);
+      fetchData();
+    }
+
   }, [location?.search]);
   
   const handleScroll = () => {
@@ -39,7 +42,9 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if(query){
+      fetchData();
+    }
   }, [pageNo]);
 
   useEffect(() => {
@@ -51,6 +56,7 @@ const SearchPage = () => {
       <input type="text" 
       placeholder="Search Here..." 
       onChange={(e)=>navigate(`/search?q=${e.target.value}`)}
+      value={query?.split("%20")?.join(" ")} 
       className="px-4 py-1 text-lg bg-white w-full text-neutral-900 rounded-full"
       />
       
@@ -64,7 +70,7 @@ const SearchPage = () => {
             return (
               <Card
                 data={searchData}
-                key={searchData.id + "search"}
+                key={searchData.id + "search" + index }
                 media_type={searchData.media_type}
               />
             );
