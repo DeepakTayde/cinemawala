@@ -9,12 +9,12 @@ const TrendingBanner = () => {
 
   const handleNext=()=>{
     if(currentImage<bannerData.length-1){
-      setCurrentImage(preve => preve+1)
+      setCurrentImage(prev => prev+1)
       }
   }
   const handlePrevious =()=>{
     if(currentImage>0){
-      setCurrentImage(preve => preve-1)
+      setCurrentImage(prev => prev-1)
       }
   }
 
@@ -27,6 +27,7 @@ const TrendingBanner = () => {
         }
     }, 5000)
     return ()=> clearInterval(interval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bannerData, imageURL, currentImage]);
 
   return (
