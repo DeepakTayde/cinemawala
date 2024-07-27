@@ -1,23 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import useFetchDetails from "../hooks/useFetchDetails";
 import { useSelector } from "react-redux";
 import moment from "moment/moment";
 import Divider from "../components/Divider";
-import HorizontalCardScrollingBar from "../components/HorizontalCardScrollingBar"
+import HorizontalCardScrollingBar from "../components/HorizontalCardScrollingBar";
+import VideoPlayer from "../components/VideoPlayer";
 
 const DetailsPage = () => {
   const params = useParams();
   const imageURL = useSelector((state) => state.movieData.imageURL);
+  const [videoPlay, setVideoPlay]= useState(false)
+  const [videoPlayId, setVideoPlayId]=useState("")
 
-  const { data: similarData } = useFetch(`/${params?.explore}/${params?.id}/similar`);
-  const { data: recommendationData } = useFetch(`/${params?.explore}/${params?.id}/recommendations`);
+  const { data: similarData } = useFetch(
+    `/${params?.explore}/${params?.id}/similar`
+  );
+  const { data: recommendationData } = useFetch(
+    `/${params?.explore}/${params?.id}/recommendations`
+  );
   const { data } = useFetchDetails(`/${params?.explore}/${params?.id}`);
-  const { data: castData } = useFetchDetails(`/${params?.explore}/${params?.id}/credits`);
+  const { data: castData } = useFetchDetails(
+    `/${params?.explore}/${params?.id}/credits`
+  );
+
+
+    const handleVideoPlay= (data)=>{
+      setVideoPlayId(data)
+      setVideoPlay(true)
+      }
   console.log("Cast data: Screenplay", recommendationData);
 
   const duration = (data?.runtime / 60)?.toFixed(1)?.split(".");
+
   const writer = castData?.crew
     ?.filter((crew) => crew?.job === "Writer" || crew?.job === "Story")
     ?.map((crew) => crew?.name)
@@ -43,6 +59,9 @@ const DetailsPage = () => {
             className="h-80 w-60 object-cover rounded"
             alt="movie"
           />
+          <button onClick={()=>handleVideoPlay(data)} className="mt-3 w-full bg-white text-black rounded px-4 py-2 text-center text-lg font-bold hover:bg-gradient-to-l from-red-500 to-orange-500 shadow-md  hover:scale-105 transition-all">
+            Play Now
+          </button>
         </div>
 
         <div>
@@ -123,10 +142,23 @@ const DetailsPage = () => {
       </div>
 
       <div>
-        <HorizontalCardScrollingBar data={similarData} heading = {"similar "+params?.explore} media_type={params?.explore}/>
-        <HorizontalCardScrollingBar data={recommendationData} heading = {"Recommendation "+params?.explore} media_type={params?.explore}/>
+        <HorizontalCardScrollingBar
+          data={similarData}
+          heading={"similar " + params?.explore}
+          media_type={params?.explore}
+        />
+        <HorizontalCardScrollingBar
+          data={recommendationData}
+          heading={"Recommendation " + params?.explore}
+          media_type={params?.explore}
+        />
       </div>
-
+      {
+        videoPlay && (
+          <VideoPlayer data = {videoPlayId} close={()=> setVideoPlay(false)} media_type={params?.explore}/>
+        )
+      }
+      
     </div>
   );
 };
