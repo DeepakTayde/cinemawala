@@ -50,6 +50,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="py-16">
