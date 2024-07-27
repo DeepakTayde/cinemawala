@@ -32,7 +32,7 @@ const SearchPage = () => {
       setData([]);
       fetchData();
     }
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location?.search]);
   
   const handleScroll = () => {
@@ -45,6 +45,7 @@ const SearchPage = () => {
     if(query){
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNo]);
 
   useEffect(() => {

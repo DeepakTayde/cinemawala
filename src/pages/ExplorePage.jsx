@@ -32,12 +32,14 @@ const ExplorePage = () => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNo]);
 
   useEffect(() => {
     setPageNo(1);
     setData([]);
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.explore]);
 
   useEffect(() => {
