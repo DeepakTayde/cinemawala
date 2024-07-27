@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
       fetchTrendingData()
       fetchConfigurationData()
-  }, []);
+  });
 
   return (
     <main className="pb-14 lg:pb-0">
