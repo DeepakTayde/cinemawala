@@ -9,32 +9,30 @@ import { useDispatch } from "react-redux";
 import { setBannerData, setImageURL } from "./store/movieSlice";
 
 function App() {
-
-  const dispatch = useDispatch()
-
-  const fetchTrendingData = async() =>{
-    try {
-      const response = await axios.get('/trending/all/day')
-      dispatch(setBannerData(response.data.results))
-    } catch (error) {
-      console.log("Error : ", error)
-    }
-  }
-
-  const fetchConfigurationData = async() =>{
-    try {
-      const response = await axios.get('/configuration')
-      dispatch(setImageURL(response.data.images.secure_base_url+"original"))
-      // console.log("configuration data : ", response.data.images.secure_base_url+"original" )
-    } catch (error) {
-      
-    }
-  }
+  const dispatch = useDispatch();
 
   useEffect(() => {
-      fetchTrendingData()
-      fetchConfigurationData()
-  });
+    const fetchTrendingData = async () => {
+      try {
+        const response = await axios.get("/trending/all/day");
+        dispatch(setBannerData(response.data.results));
+      } catch (error) {
+        console.log("Error : ", error);
+      }
+    };
+
+    const fetchConfigurationData = async () => {
+      try {
+        const response = await axios.get("/configuration");
+        dispatch(
+          setImageURL(response.data.images.secure_base_url + "original")
+        );
+        // console.log("configuration data : ", response.data.images.secure_base_url+"original" )
+      } catch (error) {}
+    };
+    fetchTrendingData();
+    fetchConfigurationData();
+  }, [dispatch]);
 
   return (
     <main className="pb-14 lg:pb-0">
@@ -43,7 +41,7 @@ function App() {
         <Outlet />
       </div>
       <Footer />
-      <MobileNavigation/>
+      <MobileNavigation />
     </main>
   );
 }
